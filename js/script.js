@@ -7,20 +7,38 @@ const addBook = document.getElementById('addBook');
 const modalFlex = document.getElementById('add');
 const modalNone = document.getElementById('close');
 
-const bookFactory = (title, author, numberOfPages) => {
-    let readStatus = false;
-    const changeReadStatus = () => {
-        if (readStatus === false) {
-            readStatus = true;
-        } else {
-            readStatus = false;
-        }
-    };
+// const bookFactory = (title, author, numberOfPages) => {
+//     let readStatus = false;
+//     const changeReadStatus = () => {
+//         if (readStatus === false) {
+//             readStatus = true;
+//         } else {
+//             readStatus = false;
+//         }
+//     };
 
-    const showReadStatus = () => readStatus;
+//     const showReadStatus = () => readStatus;
 
-    return {title, author, numberOfPages, changeReadStatus, showReadStatus};
-};
+//     return {title, author, numberOfPages, changeReadStatus, showReadStatus};
+// };
+
+class Book {
+    readStatus = false;
+
+    constructor(title, author, numberOfPages) {
+        this.title = title;
+        this.author = author;
+        this.numberOfPages = numberOfPages;
+    }
+
+    changeReadStatus() {
+        this.readStatus === false ? this.readStatus = true : this.readStatus = false;
+    }
+
+    showReadStatus() {
+        return this.readStatus;
+    }
+}
 
 function updateDisplay() {
     for(let [i, book] of myLibrary.entries()) {
@@ -39,7 +57,7 @@ function updateDisplay() {
 }
 
 function addBookToLibrary(title, author, numberOfPages) {
-    myLibrary.push(bookFactory(title, author, numberOfPages));
+    myLibrary.push(new Book(title, author, numberOfPages));
 }
 
 function removeBookFromLibrary(index) {
